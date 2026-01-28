@@ -62,7 +62,12 @@ Fast Segment Anything Model for real-time segmentation with WebSocket server sup
 
 **Ports:** 8766 (WebSocket)
 
-**Note:** Place model weights (`FastSAM.pt`) in `./weights/` directory.
+**Model Setup:**
+
+Download the pre-trained model checkpoints and place them in `./weights/` directory.
+Refer to the official repository for download links and instructions:
+
+[FastSAM Model Checkpoints](https://github.com/CASIA-LMC-Lab/FastSAM#model-checkpoints)
 
 ---
 
