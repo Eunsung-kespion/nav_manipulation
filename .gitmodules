@@ -1,0 +1,9 @@
+[submodule "perception/workspace/anygrasp_sdk"]
+	path = perception/workspace/anygrasp_sdk
+	url = https://github.com/graspnet/anygrasp_sdk.git
+[submodule "perception_dataset/workspace/grasp_multiObject"]
+	path = perception_dataset/workspace/grasp_multiObject
+	url = https://github.com/ivalab/grasp_multiObject.git
+[submodule "perception_vgn/workspace/vgn"]
+	path = perception_vgn/workspace/vgn
+	url = https://github.com/ethz-asl/vgn.git

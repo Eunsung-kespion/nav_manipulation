@@ -1,0 +1,35 @@
+services:
+  ros2-perception-motiongrasp:
+    container_name: ros2-perception-motiongrasp-container
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      # Share X11 socket for GUI applications (e.g., Rviz2)
+      - /tmp/.X11-unix:/tmp/.X11-unix:ro
+      # Share /dev for hardware access (e.g., RealSense camera)
+      - /dev:/dev
+      # Mount startup script
+      - ./start.sh:/start.sh
+    environment:
+      # Use host DISPLAY environment variable for GUI forwarding
+      # For Wayland, use 'xhost +si:localuser:root' instead of 'xhost +'
+      - DISPLAY=$DISPLAY
+      # NVIDIA driver related environment variables
+      - NVIDIA_DRIVER_CAPABILITIES=all
+    # Grant high access privileges to host hardware and network resources
+    privileged: true
+    network_mode: host
+    ipc: "host"
+    pid: "host"
+    # Settings for container interaction
+    stdin_open: true
+    tty: true
+    # NVIDIA GPU resource allocation (latest Docker Compose syntax)
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [ gpu ]

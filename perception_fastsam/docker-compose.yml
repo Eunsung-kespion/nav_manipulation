@@ -1,0 +1,28 @@
+version: '3'
+services:
+  fastsam-pipeline:
+    container_name: fastsam-pipeline
+    build:
+      context: .
+      dockerfile: Dockerfile
+    network_mode: host
+    volumes:
+      # Mount source code (changes reflected with container restart only)
+      - ./main.py:/app/main.py
+      - ./SAM_pipelines.py:/app/SAM_pipelines.py
+      # Mount FastSAM model checkpoint (place FastSAM.pt file in ./weights folder)
+      - ./weights:/app/weights
+      # Mount output directory for results
+      - ./outputs:/app/outputs
+      # Temporary data directory
+      - ./temp_data:/app/temp_data
+    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    command: tail -f /dev/null
+    # command: python main.py  # Use this line to run the actual server
